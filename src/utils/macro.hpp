@@ -10,8 +10,10 @@
 
 // defined SSE support
 
-#if (defined(_M_AMD64) || defined(_M_X64) || defined(__amd64)) && ! defined(__x86_64__)
-    #define __x86_64__ 1
+#if defined (_M_AMD64) || defined (__x86_64) 
+    #define MM_TARGET_AMD64
+#else
+#error Unsupported system
 #endif
 
 #ifndef SSE_INSTR_SET
@@ -59,3 +61,17 @@
 #elif SSE_INSTR_SET == 1
     #include <xmmintrin.h>             // SSE
 #endif // SSE_INSTR_SET
+
+// defined aligned memory alloc
+#if ((defined __QNXNTO__) || (defined _GNU_SOURCE) || ((defined _XOPEN_SOURCE) && (_XOPEN_SOURCE >= 600))) \
+ && (defined _POSIX_ADVISORY_INFO) && (_POSIX_ADVISORY_INFO > 0)
+#define HAS_POSIX_MEMALIGN 1
+#else
+#define HAS_POSIX_MEMALIGN 0
+#endif
+
+#if SSE_INSTR_SET > 0
+#define HAS_MM_MALLOC 1
+#else
+#define HAS_MM_MALLOC 0
+#endif
