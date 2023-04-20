@@ -143,7 +143,7 @@ def main():
     cmake_path = resolve_executable_path(args.cmake_path)
     cmake_args = generate_build_tree(cmake_path, source_dir, build_dir, args)
     try_create_dir(build_dir)
-    return run_build(cmake_args, build_dir, args)
+    return run_build(cmake_args, build_dir, args).returncode
 
 if __name__ == '__main__':
     try:
