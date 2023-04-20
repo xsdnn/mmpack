@@ -1,9 +1,10 @@
-set (GTEST_ROOT ${MMPACK_ROOT}/cmake/external/googletest)
+add_subdirectory(${MMPACK_ROOT}/cmake/external/googletest EXCLUDE_FROM_ALL)
+
 find_package(GTest REQUIRED)
 if(NOT GTest_FOUND)
     message(FATAL_ERROR "Not found Gtest")
 endif()
-
+enable_testing()
 
 set(MMPACK_TEST_ROOT ${MMPACK_ROOT}/test)
 
