@@ -59,6 +59,13 @@ def parse_arguments():
             help="Turn ON to parallel build"
     )
 
+
+    parser.add_argument(
+            "--skip_submodule_sync",
+            action='store_true',
+            help="Don't do a 'git submodule update'. Makes the Update phase faster."
+    )
+
     parser.add_argument(
             "--use_sse",
             action='store_true',
@@ -71,6 +78,10 @@ def parse_arguments():
             help="Turn ON to use avx_xxx"
     )
     return parser.parse_args()
+
+def update_submodules(source_dir):
+    subprocess.run(["git", "submodule", "sync", "--recursive"])
+    subprocess.run(["git", "submodule", "update", "--init", "--recursive"])
 
 def generate_build_tree(cmake_path, source_dir, build_dir, args):
     cmake_dir = os.path.join(source_dir, 'cmake')
@@ -113,8 +124,6 @@ def run_build(build_tree, build_dir, args):
     
 
     return subprocess.run(make_args)
-   
-## TODO: добавить параллельный билд
 
 def main():
     args = parse_arguments()
@@ -126,6 +135,10 @@ def main():
         build_dir = args.build_dir + "/" + args.config
     else:
         raise UsageError("Unsupported type of config")
+
+    
+    if not args.skip_submodule_sync:
+        update_submodules(source_dir)
     
     cmake_path = resolve_executable_path(args.cmake_path)
     cmake_args = generate_build_tree(cmake_path, source_dir, build_dir, args)
