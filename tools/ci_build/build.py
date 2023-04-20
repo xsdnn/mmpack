@@ -47,6 +47,12 @@ def parse_arguments():
     )
     
     parser.add_argument(
+            "--skip_unit_tests",
+            action="store_true",
+            help="Turn ON to skip all of unit tests"
+    )
+
+    parser.add_argument(
             "--use_sse",
             action='store_true',
             help="Turn ON to use sse_xx"
@@ -64,7 +70,8 @@ def generate_build_tree(cmake_path, source_dir, build_dir, args):
     cmake_args = [
             cmake_path, "-S", cmake_dir, "-B", build_dir,
             "-Dmmpack_USE_SSE=" + ("ON" if args.use_sse else "OFF"),
-            "-Dmmpack_USE_AVX=" + ("ON" if args.use_avx else "OFF")
+            "-Dmmpack_USE_AVX=" + ("ON" if args.use_avx else "OFF"),
+            "-Dmmpack_BUILD_UNITTESTS=" + ("ON" if not args.skip_unit_tests else "OFF")
     ]
 
     return cmake_args
