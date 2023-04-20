@@ -4,6 +4,7 @@ import argparse
 import subprocess
 import shutil
 import logging
+import multiprocessing
 
 class BaseError(Exception):
     """Base class for errors originating from build.py."""
@@ -53,6 +54,12 @@ def parse_arguments():
     )
 
     parser.add_argument(
+            "--parallel",
+            action="store_true",
+            help="Turn ON to parallel build"
+    )
+
+    parser.add_argument(
             "--use_sse",
             action='store_true',
             help="Turn ON to use sse_xx"
@@ -91,8 +98,23 @@ def try_create_dir(path):
         except:
             os.makedirs(path)
 
-def run_build(build_tree):
-    return subprocess.run(build_tree)
+def run_build(build_tree, build_dir, args):
+    # cmake configuration
+    build_tree_res = subprocess.run(build_tree)
+    if build_tree_res.returncode: 
+        return build_tree_res
+
+    # run make
+    make_args = [
+            "make", 
+            "-C", build_dir,
+            f"-j{multiprocessing.cpu_count() if args.parallel else 1}"        
+    ]
+    
+
+    return subprocess.run(make_args)
+   
+## TODO: добавить параллельный билд
 
 def main():
     args = parse_arguments()
@@ -108,7 +130,7 @@ def main():
     cmake_path = resolve_executable_path(args.cmake_path)
     cmake_args = generate_build_tree(cmake_path, source_dir, build_dir, args)
     try_create_dir(build_dir)
-    return run_build(cmake_args).returncode
+    return run_build(cmake_args, build_dir, args)
 
 if __name__ == '__main__':
     try:
