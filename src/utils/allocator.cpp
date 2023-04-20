@@ -1,4 +1,5 @@
 #include "allocator.hpp"
+#include "../config.hpp"
 
 namespace mmpack {
 
@@ -78,10 +79,5 @@ MM_STRONG_INLINE void aligned_allocator<T, alignment>::aligned_free(void *p) {
 }
 
 } // mmpack
- 
 
-#ifdef MM_USE_DOUBLE
-template class mmpack::aligned_allocator<double, 64>;
-#else
-template class mmpack::aligned_allocator<float, 64>;
-#endif
+template class mmpack::aligned_allocator<mmpack::mm_scalar, 64>;
