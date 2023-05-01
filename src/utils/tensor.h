@@ -19,6 +19,9 @@ template <class T,
         bool  check_size_overflow = true>
 class vector : public pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow> {
 public:
+    using pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>::pector;
+
+public:
     T& operator() (const size_t i) { return this->operator[](i); }
     const T& operator() (const size_t i) const { return this->operator[](i); }
 };
@@ -32,6 +35,9 @@ template <class T,
         class RecommendedSize = pt::default_recommended_size,
         bool  check_size_overflow = true>
 class tensor : public pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>{
+public:
+    using pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>::pector;
+
 public:
     void reserve(const size_t i, const size_t j) {
         num_rows = i;
