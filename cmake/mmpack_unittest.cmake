@@ -29,3 +29,8 @@ AddTest(
     mmpack_tensor_test
     ${MMPACK_TEST_ROOT}/test_tensor.cc
 )
+
+AddTest(
+        mmpack_sgemm_test
+        ${MMPACK_TEST_ROOT}/test_sgemm.cc
+)

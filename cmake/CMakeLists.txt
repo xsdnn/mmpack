@@ -21,6 +21,7 @@ include_directories(
 
 set(mmpack_common_src
     ${MMPACK_ROOT}/src/utils/allocator.cc
+    ${MMPACK_ROOT}/src/gemm/sgemm.cc
 )
 add_library(mmpack STATIC ${mmpack_common_src})
 
