@@ -1,15 +1,21 @@
-#pragma once
+//
+// Created by rozhin on 01.05.23.
+// Copyright (c) 2021-2023 xsdnn. All rights reserved.
+//
+
+#ifndef MMPACK_ALLOCATOR_H
+#define MMPACK_ALLOCATOR_H
 
 #include <cstddef>
 #include <exception>
-#include "macro.hpp"
+#include "macro.h"
 
 
 namespace mmpack {
 
 
-template<typename T, std::size_t alignment>
-class aligned_allocator {
+    template<typename T, std::size_t alignment>
+    class aligned_allocator {
     public:
         typedef T value_type;
         typedef T& reference;
@@ -28,12 +34,12 @@ class aligned_allocator {
 
         pointer address(reference x) const noexcept;
         const_pointer address(const_reference x) const noexcept;
-        
+
         pointer allocate(size_type n, const void* hint = 0);
         void deallocate(pointer p, size_type);
 
         size_type max_size() const noexcept;
-        
+
         template<class U, class... Args>
         void construct(U* ptr, Args&&... args) {
             void *p = ptr;
@@ -51,10 +57,12 @@ class aligned_allocator {
             ptr->~U();
         }
 
-    private:    
+    private:
         MM_STRONG_INLINE void* aligned_malloc(size_type size);
         MM_STRONG_INLINE void  aligned_free(void* p);
-};
+    };
 
 
 } // mmpack
+
+#endif //MMPACK_ALLOCATOR_H

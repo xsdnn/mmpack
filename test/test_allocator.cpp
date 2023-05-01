@@ -1,4 +1,4 @@
-#include "../src/mmpack.hpp"
+#include "../src/mmpack.h"
 #include <gtest/gtest.h>
 using namespace mmpack;
 

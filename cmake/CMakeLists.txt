@@ -3,7 +3,7 @@ project(mmpack C CXX)
 
 option(mmpack_USE_SSE OFF)
 option(mmpack_USE_AVX OFF)
-option(mmpack_BUILD_UNITTESTS OFF)
+option(mmpack_BUILD_UNITTESTS ON)
 
 set(MMPACK_ROOT ${PROJECT_SOURCE_DIR}/..)
 
@@ -18,7 +18,7 @@ endif(mmpack_USE_AVX)
 
 
 set(mmpack_common_src
-    ${MMPACK_ROOT}/src/utils/allocator.cpp
+    ${MMPACK_ROOT}/src/utils/allocator.cc
 )
 add_library(mmpack STATIC ${mmpack_common_src})
 
