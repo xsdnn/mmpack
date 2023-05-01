@@ -4,9 +4,5 @@
 #include "config.h"
 
 #include "utils/allocator.h"
-
-namespace mmpack {
-    typedef std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>> vec_t;
-    typedef std::vector<vec_t> tensor;
-} // mmpack
+#include "utils/tensor.h"
 

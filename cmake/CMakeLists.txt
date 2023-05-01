@@ -15,7 +15,9 @@ if (mmpack_USE_AVX)
     add_compile_definitions(MM_USE_AVX) # TODO: добавить generic
 endif(mmpack_USE_AVX)
 
-
+include_directories(
+    external/pector/include
+)
 
 set(mmpack_common_src
     ${MMPACK_ROOT}/src/utils/allocator.cc

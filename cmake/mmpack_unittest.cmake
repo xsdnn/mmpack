@@ -13,14 +13,19 @@ endmacro()
 set(mmpack_common_src 
     ${MMPACK_TEST_ROOT}/test_allocator.cpp
     ${MMPACK_TEST_ROOT}/test_vector.cpp
-        )
+)
 
 AddTest(
     mmpack_allocator_test
-    ${MMPACK_TEST_ROOT}/test_allocator.cpp
-        )
+    ${MMPACK_TEST_ROOT}/test_allocator.cc
+)
 
 AddTest(
     mmpack_vector_test
-    ${MMPACK_TEST_ROOT}/test_vector.cpp
-        )
+    ${MMPACK_TEST_ROOT}/test_vector.cc
+)
+
+AddTest(
+    mmpack_tensor_test
+    ${MMPACK_TEST_ROOT}/test_tensor.cc
+)
