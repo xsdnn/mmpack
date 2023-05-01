@@ -5,7 +5,7 @@
 
 #ifndef MMPACK_TEST_UTILS_H
 #define MMPACK_TEST_UTILS_H
-#include "../src/mmpack.h"
+#include "../mmpack.h"
 #include <iostream>
 using namespace mmpack;
 

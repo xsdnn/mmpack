@@ -1,4 +1,4 @@
-#include "../src/mmpack.h"
+#include "../mmpack.h"
 #include <gtest/gtest.h>
 
 TEST(vector, _01) {
