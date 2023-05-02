@@ -8,6 +8,7 @@
 
 #include <pector/pector.h>
 #include "../config.h"
+#include "allocator.h"
 
 namespace mmpack {
 
@@ -29,27 +30,22 @@ public:
 /*
  * 2-dim tensor a.k.a. Matrix2D
  */
-template <class T,
-        class Alloc = std::allocator<T>,
-        class SizeType = size_t,
-        class RecommendedSize = pt::default_recommended_size,
-        bool  check_size_overflow = true>
-class tensor : public pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>{
+class tensor : public std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>{
 public:
-    using pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>::pector;
+    using std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>::vector;
 
 public:
     void reserve(const size_t i, const size_t j) {
         num_rows = i;
         num_cols = j;
-        pt::pector<T, Alloc, SizeType, RecommendedSize, check_size_overflow>::reserve(i * j);
+        std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>::reserve(i * j);
     }
 
-    T& operator() (const size_t i, const size_t j) {
+    mm_scalar& operator() (const size_t i, const size_t j) {
         return this->operator[](i * num_cols + j);
     }
 
-    const T& operator() (const size_t i, const size_t j) const {
+    const mm_scalar& operator() (const size_t i, const size_t j) const {
         return this->operator[](i * num_cols + j);
     }
 
