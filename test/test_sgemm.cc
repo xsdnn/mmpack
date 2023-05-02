@@ -14,9 +14,9 @@ using namespace mmpack;
 #define N 6
 
 TEST(sgemm, NoTrans_NoTrans) {
-    tensor<mm_scalar> A; A.reserve(M, K);
-    tensor<mm_scalar> B; B.reserve(K, N);
-    tensor<mm_scalar> C; C.reserve(M, N);
+    tensor A; A.reserve(M, K);
+    tensor B; B.reserve(K, N);
+    tensor C; C.reserve(M, N);
 
     utils::init(A.data(), M, K);
     utils::init(B.data(), K, N);
@@ -46,9 +46,9 @@ TEST(sgemm, NoTrans_NoTrans) {
 }
 
 TEST(sgemm, NoTrans_Trans) {
-    tensor<mm_scalar> A; A.reserve(M, K);
-    tensor<mm_scalar> B; B.reserve(N, K);
-    tensor<mm_scalar> C; C.reserve(M, N);
+    tensor A; A.reserve(M, K);
+    tensor B; B.reserve(K, N);
+    tensor C; C.reserve(M, N);
 
     utils::init(A.data(), M, K);
     utils::init(B.data(), N, K);
@@ -78,9 +78,9 @@ TEST(sgemm, NoTrans_Trans) {
 }
 
 TEST(sgemm, Trans_NoTrans) {
-    tensor<mm_scalar> A; A.reserve(K, M);
-    tensor<mm_scalar> B; B.reserve(K, N);
-    tensor<mm_scalar> C; C.reserve(M, N);
+    tensor A; A.reserve(M, K);
+    tensor B; B.reserve(K, N);
+    tensor C; C.reserve(M, N);
 
     utils::init(A.data(), K, M);
     utils::init(B.data(), K, N);
@@ -110,9 +110,9 @@ TEST(sgemm, Trans_NoTrans) {
 }
 
 TEST(sgemm, Trans_Trans) {
-    tensor<mm_scalar> A; A.reserve(K, M);
-    tensor<mm_scalar> B; B.reserve(N, K);
-    tensor<mm_scalar> C; C.reserve(M, N);
+    tensor A; A.reserve(M, K);
+    tensor B; B.reserve(K, N);
+    tensor C; C.reserve(M, N);
 
     utils::init(A.data(), K, M);
     utils::init(B.data(), N, K);

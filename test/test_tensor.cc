@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 
 TEST(tensor, _01) {
-    mmpack::tensor<mmpack::mm_scalar> t;
+    mmpack::tensor t;
     t.reserve(10, 10);
 
     for (size_t i = 0; i < 10; ++i) {
