@@ -62,6 +62,18 @@ namespace mmpack {
         MM_STRONG_INLINE void  aligned_free(void* p);
     };
 
+    template <typename T1, typename T2, std::size_t alignment>
+    inline bool operator==(const aligned_allocator<T1, alignment> &,
+                           const aligned_allocator<T2, alignment> &) {
+        return true;
+    }
+
+    template <typename T1, typename T2, std::size_t alignment>
+    inline bool operator!=(const aligned_allocator<T1, alignment> &,
+                           const aligned_allocator<T2, alignment> &) {
+        return false;
+    }
+
 
 } // mmpack
 

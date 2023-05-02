@@ -32,7 +32,22 @@ public:
  */
 class tensor : public std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>{
 public:
-    using std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>::vector;
+    tensor() : std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>() {}
+
+    tensor(const size_t i, const size_t j)
+            : std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>(i * j),
+            num_rows(i), num_cols(j) {}
+
+    tensor(const tensor& rhs)
+            : std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>(rhs),
+            num_rows(rhs.num_rows), num_cols(rhs.num_cols) {}
+
+    tensor& operator=(const tensor& rhs) {
+        std::vector<mm_scalar, aligned_allocator<mm_scalar, 64>>::operator=(rhs);
+        num_rows = rhs.num_rows;
+        num_cols = rhs.num_cols;
+        return *this;
+    }
 
 public:
     void reserve(const size_t i, const size_t j) {
