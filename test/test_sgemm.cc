@@ -21,7 +21,6 @@ TEST(sgemm, NoTrans_NoTrans) {
     utils::init(A.data(), M, K);
     utils::init(B.data(), K, N);
 
-    MmThreadPool ThreadPool;
 
     MmGemm(
             CBLAS_TRANSPOSE::CblasNoTrans,
@@ -30,7 +29,7 @@ TEST(sgemm, NoTrans_NoTrans) {
             A.data(), K,
             B.data(), N,
             0.0,
-            C.data(), N, &ThreadPool);
+            C.data(), N);
 
     mm_scalar ExpectedArr[] {84, 90, 96, 102, 108, 114,
                            228, 250, 272, 294, 316, 338,
@@ -53,8 +52,6 @@ TEST(sgemm, NoTrans_Trans) {
     utils::init(A.data(), M, K);
     utils::init(B.data(), N, K);
 
-    MmThreadPool ThreadPool;
-
     MmGemm(
             CBLAS_TRANSPOSE::CblasNoTrans,
             CBLAS_TRANSPOSE::CblasTrans,
@@ -62,7 +59,7 @@ TEST(sgemm, NoTrans_Trans) {
             A.data(), K,
             B.data(), K,
             0.0,
-            C.data(), N, &ThreadPool);
+            C.data(), N);
 
     mm_scalar ExpectedArr[] {14, 38, 62, 86, 110, 134,
                              38, 126,  214,  302,  390,  478,
@@ -85,7 +82,6 @@ TEST(sgemm, Trans_NoTrans) {
     utils::init(A.data(), K, M);
     utils::init(B.data(), K, N);
 
-    MmThreadPool ThreadPool;
 
     MmGemm(
             CBLAS_TRANSPOSE::CblasTrans,
@@ -94,7 +90,7 @@ TEST(sgemm, Trans_NoTrans) {
             A.data(), M,
             B.data(), N,
             0.0,
-            C.data(), N, &ThreadPool);
+            C.data(), N);
 
     mm_scalar ExpectedArr[] {420, 450, 480, 510, 540, 570,
                              456, 490, 524, 558, 592, 626,
@@ -117,8 +113,6 @@ TEST(sgemm, Trans_Trans) {
     utils::init(A.data(), K, M);
     utils::init(B.data(), N, K);
 
-    MmThreadPool ThreadPool;
-
     MmGemm(
             CBLAS_TRANSPOSE::CblasTrans,
             CBLAS_TRANSPOSE::CblasTrans,
@@ -126,7 +120,7 @@ TEST(sgemm, Trans_Trans) {
             A.data(), M,
             B.data(), K,
             0.0,
-            C.data(), N, &ThreadPool);
+            C.data(), N);
 
     mm_scalar ExpectedArr[] {70, 190, 310, 430, 550, 670,
                              76, 212, 348, 484, 620, 756,

@@ -15,16 +15,4 @@ typedef float mm_scalar;
 typedef enum { CblasNoTrans=111, CblasTrans=112 } CBLAS_TRANSPOSE;
 #endif
 
-/*
- *      Forward decl
- */
-namespace xsdnn {
-    namespace concurrency {
-        // TODO: подумать как сделать ifdef в зависимости от билда
-        class ThreadPool {};
-    }
-}
-
-using MmThreadPool = xsdnn::concurrency::ThreadPool;
-
 } // mmpack

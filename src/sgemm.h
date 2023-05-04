@@ -23,8 +23,7 @@ MmGemm(
     size_t ldb,
     float beta,
     float* C,
-    size_t ldc,
-    MmThreadPool* ThreadPool
+    size_t ldc
 );
 #else
 #error NotImplementedYet

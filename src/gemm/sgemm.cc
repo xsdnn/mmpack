@@ -4,7 +4,6 @@
 //
 
 #include "../sgemm.h"
-#include "../utils/macro.h"
 
 namespace mmpack {
 
@@ -131,10 +130,8 @@ MmGemm(
     size_t ldb,
     float beta,
     float* C,
-    size_t ldc,
-    MmThreadPool* ThreadPool
+    size_t ldc
 ) {
-    MM_UNUSED_PARAMETER(ThreadPool);
     MmGemmOp(TransA, TransB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
 }
 } // mmpack
